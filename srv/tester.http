@@ -1,0 +1,104 @@
+### Get service document
+
+http://localhost:4004/odata/v4/Catalogservice/
+
+### Get Service metadata document
+
+http://localhost:4004/odata/v4/Catalogservice/$metadata
+
+### Get All the employee data
+
+http://localhost:4004/odata/v4/Catalogservice/Employeeset
+
+### Get only oneemployee data
+
+http://localhost:4004/odata/v4/Catalogservice/Employeeset/02BD2137-0890-1EEA-A6C2-BB55C197E7FB
+
+### Get the next 10 records by skipping first 10 records
+
+http://localhost:4004/odata/v4/Catalogservice/Employeeset?$top=10&$skip=10
+
+### Get the next 2 records by skipping first 10 records
+
+http://localhost:4004/odata/v4/Catalogservice/Employeeset?$top=2&$skip=10
+
+### Getting only female records.
+
+http://localhost:4004/odata/v4/Catalogservice/Employeeset?$filter=sex eq 'F'
+
+### Getting the count of the records
+
+http://localhost:4004/odata/v4/Catalogservice/Employeeset/$count
+
+### Getting only few fields from all the employeeset
+
+http://localhost:4004/odata/v4/Catalogservice/Employeeset?$select=ID,nameFirst,sex
+
+### Insert employee data
+
+post http://localhost:4004/odata/v4/Catalogservice/Employeeset
+Content-Type: application/json
+
+ {
+
+      "nameFirst": "Lakshmi",
+      "nameMiddle": null,
+      "nameLast": "Saddikuti",
+      "nameInitials": null,
+      "sex": "F",
+      "language": "E",
+      "phoneNumber": "9553290201",
+     
+      "loginName": "LAKSHMI",
+      "Currency_code": "INR",
+      "salaryAmount": 55549,
+      "accountNumber": "111222333",
+      "bankId": "51000",
+      "bankName": "My Bank of Antioch"
+    }
+
+### Getting newly created record
+
+http://localhost:4004/odata/v4/Catalogservice/Employeeset/5f89e9b1-741a-42a3-a004-a2a5d14f59e9
+
+### Updating the newly created data
+
+PATCH http://localhost:4004/odata/v4/Catalogservice/Employeeset/5f89e9b1-741a-42a3-a004-a2a5d14f59e9
+Content-Type: application/json
+
+{
+     
+  "salaryAmount": 1000000000,
+   "Currency_code": "USD"
+}
+
+
+### deleting the particular record in Employeeset
+
+delete http://localhost:4004/odata/v4/Catalogservice/Employeeset/5f89e9b1-741a-42a3-a004-a2a5d14f59e9
+
+### Getting all the POS
+
+http://localhost:4004/odata/v4/Catalogservice/POs
+
+### Getting the single PO
+
+http://localhost:4004/odata/v4/Catalogservice/POs/74867AD200E41EDBA5D8B0C98DC34052
+
+### Getting the single PO
+
+http://localhost:4004/odata/v4/Catalogservice/POs/74867AD200E41EDBA5D8B0C98DC34052?$expand=Items
+
+### Testing the boots action.
+
+
+POST http://localhost:4004/odata/v4/Catalogservice/POs/('74867AD200E41EDBA5D8B0C98DC34052')/CatalogService.boost
+Content-Type: application/json
+
+{
+
+}
+### Getting largestOrder
+
+http://localhost:4004/odata/v4/Catalogservice/largestOrder()
+
