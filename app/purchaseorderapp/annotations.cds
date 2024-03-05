@@ -21,7 +21,7 @@ annotate service.POs with @(UI: {
         },
         {
             $Type: 'UI.DataField',
-            Value: PARTNER_GUID.ADDRESS_GUID.COUNTRY,
+            Value: PARTNER_GUID.ADDRESS_GUID.CITY,
         },
         {
             $Type: 'UI.DataField',
