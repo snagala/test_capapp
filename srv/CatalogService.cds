@@ -2,7 +2,7 @@
 
 using { anubhav.db.master, anubhav.db.transaction } from '../db/datamodel';
 //Definition for the service.
-service CatalogService @(path: 'CatalogService'){
+service CatalogService @(path: 'CatalogService', requires: 'authenticated-user'){
 //If we want to maintain authorization like oly access to read this file then
 @readonly
 
@@ -10,7 +10,12 @@ service CatalogService @(path: 'CatalogService'){
     entity BusinesspartnerSet as projection on master.businesspartner;
     @Capabilities: { Updatable,Deletable : false}
     entity ProductSet as projection on master.product;
-    entity AddressSet as projection on master.address;
+
+    //Here we are telling that we are restricting the data based on the user login country.We are keeping this peace of code in Address specifically because country present in Address entity.
+    entity AddressSet @(restrict: [ 
+                        { grant: ['READ'], to: 'Viewer', where: 'COUNTRY = $user.myCountry' },
+                        { grant: ['WRITE'], to: 'Admin' }
+                        ]) as projection on master.address;
     entity POs @(
         odata.draft.enabled : true,
         Common.DefaultValuesFunction : 'getOrderDefaults'
